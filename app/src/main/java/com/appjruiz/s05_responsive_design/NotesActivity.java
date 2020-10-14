@@ -10,8 +10,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class NotesActivity extends AppCompatActivity {
-
+public class NotesActivity extends AppCompatActivity implements NotesInteractionListener {
+    //navegacion de la aplicacion
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,4 +27,18 @@ public class NotesActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    @Override
+    public void editNoteClick(Note note) {
+
+    }
+
+    @Override
+    public void deleteNoteClick(Note note) {
+
+    }
+
+    @Override
+    public void favoriteNoteClick(Note note) {
+
+    }
 }
