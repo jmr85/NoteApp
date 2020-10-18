@@ -1,5 +1,6 @@
 package com.appjruiz.s05_responsive_design;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,11 @@ import java.util.List;
 public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
 
     private final List<Note> mValues;
-    private final NotesInteractionListener mListener;
+    private Context ctx;
 
-    public MyNoteRecyclerViewAdapter(List<Note> items, NotesInteractionListener mListener) {
+    public MyNoteRecyclerViewAdapter(List<Note> items, Context ctx) {
         this.mValues = items;
-        this.mListener = mListener;
+        this.ctx = ctx;
     }
 
     @Override
@@ -43,11 +44,7 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
         holder.imageViewFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.favoriteNoteClick(holder.mItem);
-                }
+
             }
         });
     }

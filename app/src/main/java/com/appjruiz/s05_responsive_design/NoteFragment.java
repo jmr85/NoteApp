@@ -27,7 +27,6 @@ public class NoteFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 2;
-    private NotesInteractionListener mListener;
     private List<Note> noteList;
     private MyNoteRecyclerViewAdapter adapterNotes;
 
@@ -89,20 +88,9 @@ public class NoteFragment extends Fragment {
             noteList.add(new Note("Recordar", "He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro", false, android.R.color.holo_green_light));
             noteList.add(new Note("Cumpleaños (fiesta)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", true, android.R.color.holo_orange_light));
 
-            adapterNotes = new MyNoteRecyclerViewAdapter(noteList, mListener);
+            adapterNotes = new MyNoteRecyclerViewAdapter(noteList, getActivity());
             recyclerView.setAdapter(adapterNotes);
         }
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof NotesInteractionListener) {
-            mListener = (NotesInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement NotesInteractionListener");
-        }
     }
 }
