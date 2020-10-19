@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">S05-responsive-design</string>
+    <string name="app_name">Notes</string>
     <string name="title_activity_notes">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

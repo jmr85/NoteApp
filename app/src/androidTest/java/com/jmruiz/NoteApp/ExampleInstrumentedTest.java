@@ -1,4 +1,4 @@
-package com.appjruiz.s05_responsive_design;
+package com.jmruiz.NoteApp;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.appjruiz.s05_responsive_design", appContext.getPackageName());
+        assertEquals("com.jmruiz.NoteApp", appContext.getPackageName());
     }
 }

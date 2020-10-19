@@ -1,4 +1,4 @@
-package com.appjruiz.s05_responsive_design;
+package com.jmruiz.NoteApp;
 
 import android.os.Bundle;
 

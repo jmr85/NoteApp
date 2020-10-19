@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "S05-responsive-design"
+rootProject.name = "NoteApp"
