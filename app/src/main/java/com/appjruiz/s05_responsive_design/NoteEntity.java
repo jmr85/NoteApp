@@ -3,7 +3,7 @@ package com.appjruiz.s05_responsive_design;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Notes")
+@Entity(tableName = "notes")
 public class NoteEntity {
 
     @PrimaryKey(autoGenerate = true)

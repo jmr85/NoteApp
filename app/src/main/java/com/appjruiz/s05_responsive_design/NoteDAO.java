@@ -1,0 +1,30 @@
+package com.appjruiz.s05_responsive_design;
+
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
+
+import java.util.List;
+
+@Dao
+public interface NoteDAO {
+    @Insert
+    void insert(NoteEntity note);
+
+    @Update
+    void update(NoteEntity note);
+
+    @Query("DELETE FROM notes")
+    void deleteAll();
+
+    @Query("DELETE FROM notes WHERE id = :idNote")
+    void deleteById(int idNote);
+
+    @Query("SELECT * FROM notes ORDER BY title ASC")
+    LiveData<List<NoteEntity>> getAll();
+
+    @Query("SELECT * FROM notes WHERE favorite LIKE 'true'")
+    LiveData<List<NoteEntity>> getAllFavorites();
+}
