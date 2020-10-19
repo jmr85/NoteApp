@@ -9,7 +9,7 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface NoteDAO {
+public interface NoteDao {
     @Insert
     void insert(com.jmruiz.NoteApp.NoteEntity note);
 
