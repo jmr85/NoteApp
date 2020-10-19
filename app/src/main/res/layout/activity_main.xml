@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="24dp"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"

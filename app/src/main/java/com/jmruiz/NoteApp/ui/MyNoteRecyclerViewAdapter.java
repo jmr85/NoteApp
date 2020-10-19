@@ -1,4 +1,4 @@
-package com.jmruiz.NoteApp;
+package com.jmruiz.NoteApp.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.jmruiz.NoteApp.db.entity.NoteEntity;
+import com.jmruiz.NoteApp.R;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.jmruiz.NoteApp;
+package com.jmruiz.NoteApp.ui;
 
 import android.os.Bundle;
 
@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jmruiz.NoteApp.R;
 
 public class DashboardActivity extends AppCompatActivity {
     //navegacion de la aplicacion

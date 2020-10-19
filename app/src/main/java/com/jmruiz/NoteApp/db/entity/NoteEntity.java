@@ -1,4 +1,4 @@
-package com.jmruiz.NoteApp;
+package com.jmruiz.NoteApp.db.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

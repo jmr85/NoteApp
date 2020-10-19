@@ -1,4 +1,4 @@
-package com.jmruiz.NoteApp;
+package com.jmruiz.NoteApp.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.jmruiz.NoteApp.R;
+import com.jmruiz.NoteApp.db.entity.NoteEntity;
 
 import java.util.ArrayList;
 import java.util.List;
