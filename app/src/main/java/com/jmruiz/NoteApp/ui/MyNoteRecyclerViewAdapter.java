@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
 
-    private final List<NoteEntity> mValues;
+    private List<NoteEntity> mValues;
     private Context ctx;
 
     public MyNoteRecyclerViewAdapter(List<NoteEntity> items, Context ctx) {
@@ -55,6 +55,12 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public void setNewNotes(List<NoteEntity> newNotes) {
+        this.mValues = newNotes;
+        //Notifica a los observadores adjuntos que los datos subyacentes se han modificado y que cualquier Vista que refleje el conjunto de datos debe actualizarse.
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

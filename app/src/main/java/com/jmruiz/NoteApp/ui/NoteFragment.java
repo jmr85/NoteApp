@@ -7,11 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.jmruiz.NoteApp.NewNoteDialogViewModel;
 import com.jmruiz.NoteApp.R;
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
 
@@ -30,6 +35,7 @@ public class NoteFragment extends Fragment {
     private int mColumnCount = 2;
     private List<NoteEntity> noteEntityList;
     private MyNoteRecyclerViewAdapter adapterNotes;
+    private NewNoteDialogViewModel noteViewModel;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -76,22 +82,19 @@ public class NoteFragment extends Fragment {
             }
 
             noteEntityList = new ArrayList<>();
-            noteEntityList.add(new NoteEntity("Lista de la compra", "comprar pan tostado", true, android.R.color.holo_blue_light));
-            noteEntityList.add(new NoteEntity("Recordar", "He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro", false, android.R.color.holo_green_light));
-            noteEntityList.add(new NoteEntity("Cumpleaños (fiesta)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", true, android.R.color.holo_orange_light));
-            noteEntityList.add(new NoteEntity("Lista de la compra", "comprar pan tostado", true, android.R.color.holo_blue_light));
-            noteEntityList.add(new NoteEntity("Recordar", "He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro", false, android.R.color.holo_green_light));
-            noteEntityList.add(new NoteEntity("Cumpleaños (fiesta)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", true, android.R.color.holo_orange_light));
-            noteEntityList.add(new NoteEntity("Lista de la compra", "comprar pan tostado", true, android.R.color.holo_blue_light));
-            noteEntityList.add(new NoteEntity("Recordar", "He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro", false, android.R.color.holo_green_light));
-            noteEntityList.add(new NoteEntity("Cumpleaños (fiesta)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", true, android.R.color.holo_orange_light));
-            noteEntityList.add(new NoteEntity("Lista de la compra", "comprar pan tostado", true, android.R.color.holo_blue_light));
-            noteEntityList.add(new NoteEntity("Recordar", "He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro", false, android.R.color.holo_green_light));
-            noteEntityList.add(new NoteEntity("Cumpleaños (fiesta)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", true, android.R.color.holo_orange_light));
 
             adapterNotes = new MyNoteRecyclerViewAdapter(noteEntityList, getActivity());
             recyclerView.setAdapter(adapterNotes);
         }
         return view;
+    }
+    private void launchViewModel() {
+        noteViewModel = new ViewModelProvider(getActivity()).get(NewNoteDialogViewModel.class);
+        noteViewModel.getAllNotes().observe(getActivity(), new Observer<List<NoteEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<NoteEntity> noteEntities) {
+                adapterNotes.setNewNotes(noteEntities);
+            }
+        });
     }
 }

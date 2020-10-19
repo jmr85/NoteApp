@@ -13,14 +13,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.jmruiz.NoteApp.db.entity.NoteEntity;
+
 public class NewNoteDialogFragment  extends DialogFragment {
+
     private NewNoteDialogViewModel mViewModel;
 
     public static NewNoteDialogFragment newInstance() {
         return new NewNoteDialogFragment();
     }
+
     private View view;
     private EditText editTextTitle, editTextContent;
     private RadioGroup radioGroupColor;
@@ -29,8 +34,7 @@ public class NewNoteDialogFragment  extends DialogFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(NewNoteDialogViewModel.class);
-        // TODO: Use the ViewModel
+
     }
 
     @Override
@@ -53,11 +57,17 @@ public class NewNoteDialogFragment  extends DialogFragment {
                         }
 
                         boolean isFavorite = switchNoteFavorite.isChecked();
+
+                        // Comunicar al ViewModel el nuevo dato.
+                        mViewModel = new ViewModelProvider(getActivity()).get(NewNoteDialogViewModel.class);
+                        mViewModel.insertNote(new NoteEntity(title, content, isFavorite, color));
+                        dialog.dismiss();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
+                        dialog.dismiss();
                     }
                 });
 
