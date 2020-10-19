@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link Note}.
+ * {@link RecyclerView.Adapter} that can display a {@link NoteEntity}.
  */
 public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Note> mValues;
+    private final List<NoteEntity> mValues;
     private Context ctx;
 
-    public MyNoteRecyclerViewAdapter(List<Note> items, Context ctx) {
+    public MyNoteRecyclerViewAdapter(List<NoteEntity> items, Context ctx) {
         this.mValues = items;
         this.ctx = ctx;
     }
@@ -59,7 +59,7 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
         public final TextView textViewTitle;
         public final TextView textViewContent;
         public final ImageView imageViewFavorite;
-        public Note mItem;
+        public NoteEntity mItem;
 
         public ViewHolder(View view) {
             super(view);
