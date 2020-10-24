@@ -7,14 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
 
@@ -29,7 +28,7 @@ public class NewNoteDialogFragment  extends DialogFragment {
     private View view;
     private EditText editTextTitle, editTextContent;
     private RadioGroup radioGroupColor;
-    private Switch switchNoteFavorite;
+    private SwitchCompat switchNoteFavorite;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -59,7 +58,8 @@ public class NewNoteDialogFragment  extends DialogFragment {
                         boolean isFavorite = switchNoteFavorite.isChecked();
 
                         // Comunicar al ViewModel el nuevo dato.
-                        mViewModel = new ViewModelProvider(getActivity()).get(NewNoteDialogViewModel.class);
+                        mViewModel = new ViewModelProvider(getActivity())
+                                .get(NewNoteDialogViewModel.class);
                         mViewModel.insertNote(new NoteEntity(title, content, isFavorite, color));
                         dialog.dismiss();
                     }

@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jmruiz.NoteApp.NewNoteDialogViewModel;
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
 import com.jmruiz.NoteApp.R;
 
@@ -21,10 +25,12 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
 
     private List<NoteEntity> mValues;
     private Context ctx;
+    private NewNoteDialogViewModel viewModel;
 
     public MyNoteRecyclerViewAdapter(List<NoteEntity> items, Context ctx) {
         this.mValues = items;
         this.ctx = ctx;
+        viewModel = new ViewModelProvider((AppCompatActivity)ctx).get(NewNoteDialogViewModel.class);
     }
 
     @Override
@@ -39,15 +45,22 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
         holder.mItem = mValues.get(position);
         holder.textViewTitle.setText(holder.mItem.getTitle());
         holder.textViewContent.setText(holder.mItem.getContent());
-        //holder.mIdView.setText(mValues.get(position).id);
-        //holder.mContentView.setText(mValues.get(position).content);
+
         if(holder.mItem.isFavorite()) {
             holder.imageViewFavorite.setImageResource(R.drawable.ic_baseline_star_24);
         }
         holder.imageViewFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(holder.mItem.isFavorite()) {
+                    holder.mItem.setFavorite(false);
+                    holder.imageViewFavorite.setImageResource(R.drawable.ic_baseline_star_24);
 
+                } else {
+                    holder.mItem.setFavorite(true);
+                    holder.imageViewFavorite.setImageResource(R.drawable.ic_baseline_star_border_24);
+                }
+                viewModel.updateNote(holder.mItem);
             }
         });
     }
