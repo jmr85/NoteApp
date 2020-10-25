@@ -13,21 +13,21 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {NoteEntity.class}, version = 1, exportSchema = false)
-public abstract class NoteRoomDatabase  extends RoomDatabase {
+public abstract class NoteDatabase  extends RoomDatabase {
 
     public abstract NoteDao noteDao();
 
-    private static volatile NoteRoomDatabase INSTANCE;
+    private static volatile NoteDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static NoteRoomDatabase getDatabase(final Context context) {
+    public static NoteDatabase getDatabase(final Context context) {
         if(INSTANCE == null) {
-            synchronized (NoteRoomDatabase.class) {
+            synchronized (NoteDatabase.class) {
                 if(INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            NoteRoomDatabase.class, "notes_database")
+                            NoteDatabase.class, "notes_database")
                             .build();
                 }
             }

@@ -4,7 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.jmruiz.NoteApp.db.NoteRoomDatabase;
+import com.jmruiz.NoteApp.db.NoteDatabase;
 import com.jmruiz.NoteApp.db.dao.NoteDao;
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
 
@@ -17,7 +17,7 @@ public class NoteRepository {
     private LiveData<List<NoteEntity>> allNotesFavorites;
 
     public NoteRepository(Application application) {
-        NoteRoomDatabase db = NoteRoomDatabase.getDatabase(application);
+        NoteDatabase db = NoteDatabase.getDatabase(application);
         noteDao = db.noteDao();
         allNotes = noteDao.getAll();
         allNotesFavorites = noteDao.getAllFavorites();
@@ -28,13 +28,13 @@ public class NoteRepository {
     public LiveData<List<NoteEntity>> getAllNotesFavorites() { return allNotesFavorites; }
 
     public void insert(NoteEntity note) {
-        NoteRoomDatabase.databaseWriteExecutor.execute(() -> {
+        NoteDatabase.databaseWriteExecutor.execute(() -> {
             noteDao.insert(note);
         });
     }
 
     public void update(NoteEntity note) {
-        NoteRoomDatabase.databaseWriteExecutor.execute(() -> {
+        NoteDatabase.databaseWriteExecutor.execute(() -> {
             noteDao.update(note);
         });
     }

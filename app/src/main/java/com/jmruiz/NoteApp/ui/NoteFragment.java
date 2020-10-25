@@ -3,6 +3,7 @@ package com.jmruiz.NoteApp.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -80,11 +81,13 @@ public class NoteFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (view.getId() == R.id.listPortrait) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                //recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount, StaggeredGridLayoutManager.VERTICAL));
             } else {
                 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                 float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
                 int numberColumns = (int) (dpWidth / 180);
+                Log.i("APP", "Number Columns: " + numberColumns);
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(numberColumns, StaggeredGridLayoutManager.VERTICAL));
             }
 
