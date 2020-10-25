@@ -38,7 +38,7 @@ public class NoteFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 2;
     private List<NoteEntity> noteEntityList;
-    private MyNoteRecyclerViewAdapter adapterNotes;
+    private NotesAdapter adapterNotes;
     private NewNoteDialogViewModel noteViewModel;
 
     /**
@@ -90,7 +90,7 @@ public class NoteFragment extends Fragment {
 
             noteEntityList = new ArrayList<>();
 
-            adapterNotes = new MyNoteRecyclerViewAdapter(noteEntityList, getActivity());
+            adapterNotes = new NotesAdapter(noteEntityList, getActivity());
             recyclerView.setAdapter(adapterNotes);
 
             launchViewModel();

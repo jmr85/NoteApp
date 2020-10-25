@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jmruiz.NoteApp.NewNoteDialogViewModel;
@@ -21,13 +20,13 @@ import java.util.List;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link NoteEntity}.
  */
-public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     private List<NoteEntity> mValues;
     private Context ctx;
     private NewNoteDialogViewModel viewModel;
 
-    public MyNoteRecyclerViewAdapter(List<NoteEntity> items, Context ctx) {
+    public NotesAdapter(List<NoteEntity> items, Context ctx) {
         this.mValues = items;
         this.ctx = ctx;
         viewModel = new ViewModelProvider((AppCompatActivity)ctx).get(NewNoteDialogViewModel.class);
