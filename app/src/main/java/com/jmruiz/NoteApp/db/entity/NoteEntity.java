@@ -1,7 +1,10 @@
 package com.jmruiz.NoteApp.db.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.util.Date;
 
 @Entity(tableName = "notes")
 public class NoteEntity {
@@ -12,12 +15,15 @@ public class NoteEntity {
     private String content;
     private boolean favorite;
     private String color;
+    @ColumnInfo(name = "created_at")
+    private Date createdAt;
 
     public NoteEntity(String title, String content, boolean favorite, String color) {
         this.title = title;
         this.content = content;
         this.favorite = favorite;
         this.color = color;
+        this.createdAt = new Date(System.currentTimeMillis());
     }
 
     public int getId() {
@@ -58,5 +64,13 @@ public class NoteEntity {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

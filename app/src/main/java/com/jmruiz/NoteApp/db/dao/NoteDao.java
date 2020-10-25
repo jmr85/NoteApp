@@ -24,7 +24,7 @@ public interface NoteDao {
     @Query("DELETE FROM notes WHERE id = :idNote")
     void deleteById(int idNote);
 
-    @Query("SELECT * FROM notes ORDER BY title ASC")
+    @Query("SELECT * FROM notes ORDER BY created_at DESC")
     LiveData<List<NoteEntity>> getAll();
 
     @Query("SELECT * FROM notes WHERE favorite LIKE 'true'")
