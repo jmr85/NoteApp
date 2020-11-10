@@ -56,11 +56,20 @@
             android:id="@+id/imageViewSaveNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/editTextContent"
             app:layout_constraintTop_toBottomOf="@+id/editTextContent"
             app:srcCompat="@drawable/ic_baseline_save_24" />
+
+        <ImageView
+            android:id="@+id/imageViewDeleteNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewSaveNote"
+            app:layout_constraintTop_toBottomOf="@+id/editTextContent"
+            app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

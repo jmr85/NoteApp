@@ -39,4 +39,6 @@ public class NewNoteDialogViewModel extends AndroidViewModel {
     // El fragment que actualice la nota, deberá comunicarlo a este ViewModel
     public void updateNote(NoteEntity noteEntity) { DataRepository.update(noteEntity); }
 
+    public void deleteNoteById(NoteEntity newNoteEntity) { DataRepository.deleteById(newNoteEntity); }
+
 }

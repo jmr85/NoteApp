@@ -76,10 +76,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
                 viewModel.updateNote(holder.mItem);
             }
         });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.imageViewDeleteNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.imageViewSaveNote.setVisibility(View.VISIBLE);
+                // aca deberia elimina la nota !!!
+
+                viewModel.deleteNoteById(holder.mItem);
             }
         });
     }
@@ -101,6 +103,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         public final EditText editTextContent;
         public final ImageView imageViewFavorite;
         public final ImageView imageViewSaveNote;
+        public final ImageView imageViewDeleteNote;
         public NoteEntity mItem;
 
         public ViewHolder(View view) {
@@ -110,6 +113,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             editTextContent = (EditText) view.findViewById(R.id.editTextContent);
             imageViewFavorite = (ImageView) view.findViewById(R.id.imageViewFavorite);
             imageViewSaveNote = (ImageView) view.findViewById(R.id.imageViewSaveNote);
+            imageViewDeleteNote = (ImageView) view.findViewById(R.id.imageViewDeleteNote);
         }
 
         @Override

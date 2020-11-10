@@ -2,6 +2,7 @@ package com.jmruiz.NoteApp.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -21,8 +22,8 @@ public interface NoteDao {
     @Query("DELETE FROM notes")
     void deleteAll();
 
-    @Query("DELETE FROM notes WHERE id = :idNote")
-    void deleteById(int idNote);
+    @Delete
+    void deleteById(NoteEntity note);
 
     @Query("SELECT * FROM notes WHERE id = :idNote")
     LiveData<NoteEntity> getById(int idNote);

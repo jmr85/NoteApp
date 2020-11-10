@@ -32,6 +32,7 @@ public class DataRepository {
 
     public LiveData<NoteEntity> getNote(int id) { return note; }
 
+
     public void insert(NoteEntity note) {
         NoteDatabase.databaseWriteExecutor.execute(() -> {
             noteDao.insert(note);
@@ -47,6 +48,12 @@ public class DataRepository {
     public void deleteAll() {
         NoteDatabase.databaseWriteExecutor.execute(() -> {
             noteDao.deleteAll();
+        });
+    }
+
+    public void deleteById(NoteEntity note) {
+        NoteDatabase.databaseWriteExecutor.execute(() -> {
+            noteDao.deleteById(note);
         });
     }
 
