@@ -4,14 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.jmruiz.NoteApp.NewNoteDialogViewModel;
+import com.jmruiz.NoteApp.viewmodel.NewNoteDialogViewModel;
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
 import com.jmruiz.NoteApp.R;
 
@@ -25,6 +26,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     private List<NoteEntity> mValues;
     private Context ctx;
     private NewNoteDialogViewModel viewModel;
+    private FragmentManager fm;
 
     public NotesAdapter(List<NoteEntity> items, Context ctx) {
         this.mValues = items;
@@ -42,8 +44,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.textViewTitle.setText(holder.mItem.getTitle());
-        holder.textViewContent.setText(holder.mItem.getContent());
+        holder.editTextTitle.setText(holder.mItem.getTitle());
+        holder.editTextContent.setText(holder.mItem.getContent());
+
 
         if(holder.mItem.isFavorite()) {
             holder.imageViewFavorite.setImageResource(R.drawable.ic_baseline_star_24);
@@ -53,13 +56,30 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             public void onClick(View v) {
                 if(holder.mItem.isFavorite()) {
                     holder.mItem.setFavorite(false);
-                    holder.imageViewFavorite.setImageResource(R.drawable.ic_baseline_star_24);
+                    holder.imageViewFavorite.setImageResource(R.drawable.ic_baseline_star_border_24);
 
                 } else {
                     holder.mItem.setFavorite(true);
-                    holder.imageViewFavorite.setImageResource(R.drawable.ic_baseline_star_border_24);
+                    holder.imageViewFavorite.setImageResource(R.drawable.ic_baseline_star_24);
                 }
                 viewModel.updateNote(holder.mItem);
+            }
+        });
+        holder.imageViewSaveNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // aca deberia actualizar nota !!!
+
+                holder.mItem.setTitle(holder.editTextTitle.getText().toString());
+                holder.mItem.setContent(holder.editTextContent.getText().toString());
+
+                viewModel.updateNote(holder.mItem);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imageViewSaveNote.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -77,22 +97,24 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView textViewTitle;
-        public final TextView textViewContent;
+        public final EditText editTextTitle;
+        public final EditText editTextContent;
         public final ImageView imageViewFavorite;
+        public final ImageView imageViewSaveNote;
         public NoteEntity mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
-            textViewContent = (TextView) view.findViewById(R.id.textViewContent);
+            editTextTitle = (EditText) view.findViewById(R.id.editTextTitle);
+            editTextContent = (EditText) view.findViewById(R.id.editTextContent);
             imageViewFavorite = (ImageView) view.findViewById(R.id.imageViewFavorite);
+            imageViewSaveNote = (ImageView) view.findViewById(R.id.imageViewSaveNote);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + textViewContent.getText() + "'";
+            return super.toString() + " '" + editTextContent.getText() + "'";
         }
     }
 }

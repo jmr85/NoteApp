@@ -10,22 +10,27 @@ import com.jmruiz.NoteApp.db.entity.NoteEntity;
 
 import java.util.List;
 
-public class NoteRepository {
+public class DataRepository {
 
     private NoteDao noteDao;
+    private LiveData<NoteEntity> note;
+    protected int id;
     private LiveData<List<NoteEntity>> allNotes;
     private LiveData<List<NoteEntity>> allNotesFavorites;
 
-    public NoteRepository(Application application) {
+    public DataRepository(Application application) {
         NoteDatabase db = NoteDatabase.getDatabase(application);
         noteDao = db.noteDao();
         allNotes = noteDao.getAll();
         allNotesFavorites = noteDao.getAllFavorites();
+        note = noteDao.getById(id);
     }
 
     public LiveData<List<NoteEntity>> getAll() { return allNotes; }
 
     public LiveData<List<NoteEntity>> getAllNotesFavorites() { return allNotesFavorites; }
+
+    public LiveData<NoteEntity> getNote(int id) { return note; }
 
     public void insert(NoteEntity note) {
         NoteDatabase.databaseWriteExecutor.execute(() -> {
@@ -36,6 +41,12 @@ public class NoteRepository {
     public void update(NoteEntity note) {
         NoteDatabase.databaseWriteExecutor.execute(() -> {
             noteDao.update(note);
+        });
+    }
+
+    public void deleteAll() {
+        NoteDatabase.databaseWriteExecutor.execute(() -> {
+            noteDao.deleteAll();
         });
     }
 

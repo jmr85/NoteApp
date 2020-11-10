@@ -1,4 +1,4 @@
-package com.jmruiz.NoteApp;
+package com.jmruiz.NoteApp.ui;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -15,20 +14,31 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.jmruiz.NoteApp.R;
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
+import com.jmruiz.NoteApp.viewmodel.NewNoteDialogViewModel;
 
 public class NewNoteDialogFragment  extends DialogFragment {
 
     private NewNoteDialogViewModel mViewModel;
+    //crear setter and getter
+    private String title;
+    private String content;
+    private boolean isFavorite;
+    private View view;
+    private EditText editTextTitle, editTextContent;
+    private SwitchCompat switchNoteFavorite;
+
+    public void setAdInfo(String title, String content, boolean isFavorite)
+    {
+        this.title = title;
+        this.content = content;
+        this.isFavorite = isFavorite;
+    }
 
     public static NewNoteDialogFragment newInstance() {
         return new NewNoteDialogFragment();
     }
-
-    private View view;
-    private EditText editTextTitle, editTextContent;
-    private RadioGroup radioGroupColor;
-    private SwitchCompat switchNoteFavorite;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -45,23 +55,17 @@ public class NewNoteDialogFragment  extends DialogFragment {
         builder.setMessage("Enter the details of the new note")
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        String title = editTextTitle.getText().toString();
-                        String content = editTextContent.getText().toString();
-                        String color = "blue";
-                        switch (radioGroupColor.getCheckedRadioButtonId()) {
-                            case R.id.radioButtonColorRed:
-                                color = "red"; break;
-                            case R.id.radioButtonColorGreen:
-                                color = "green"; break;
-                        }
+                        title = editTextTitle.getText().toString();
+                        content = editTextContent.getText().toString();
 
-                        boolean isFavorite = switchNoteFavorite.isChecked();
+                        isFavorite = switchNoteFavorite.isChecked();
 
                         // Comunicar al ViewModel el nuevo dato.
                         mViewModel = new ViewModelProvider(getActivity())
                                 .get(NewNoteDialogViewModel.class);
-                        mViewModel.insertNote(new NoteEntity(title, content, isFavorite, color));
+                        mViewModel.insertNote(new NoteEntity(title, content, isFavorite));
                         dialog.dismiss();
+
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -76,12 +80,35 @@ public class NewNoteDialogFragment  extends DialogFragment {
 
         editTextTitle = view.findViewById(R.id.editTextTitle);
         editTextContent = view.findViewById(R.id.editTextContent);
-        radioGroupColor = view.findViewById(R.id.radioGroupColor);
         switchNoteFavorite = view.findViewById(R.id.switchNoteFavorite);
 
         builder.setView(view);
 
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }

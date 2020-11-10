@@ -9,6 +9,7 @@ import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.jmruiz.NoteApp.db.converter.DateTypeConverter;
 import com.jmruiz.NoteApp.db.dao.NoteDao;
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
 
@@ -34,7 +35,8 @@ public abstract class NoteDatabase  extends RoomDatabase {
         }
     };
 
-    public static NoteDatabase getDatabase(final Context context) {
+
+    public static synchronized NoteDatabase getDatabase(final Context context) {
         if(INSTANCE == null) {
             synchronized (NoteDatabase.class) {
                 if(INSTANCE == null) {

@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.jmruiz.NoteApp.NewNoteDialogFragment;
-import com.jmruiz.NoteApp.NewNoteDialogViewModel;
+import com.jmruiz.NoteApp.viewmodel.DeleteAllNotesDialogViewModel;
+import com.jmruiz.NoteApp.viewmodel.NewNoteDialogViewModel;
 import com.jmruiz.NoteApp.R;
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
 
@@ -81,8 +81,8 @@ public class NoteFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (view.getId() == R.id.listPortrait) {
-                //recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount, StaggeredGridLayoutManager.VERTICAL));
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount, StaggeredGridLayoutManager.VERTICAL));
             } else {
                 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                 float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
@@ -122,6 +122,14 @@ public class NoteFragment extends Fragment {
             case R.id.action_add_note:
                 showDialogNeWNote();
                 return true;
+            case R.id.action_delete_notes:
+                showDialogDeleteAllNotes();
+                return true;
+            case R.id.navigation_dashboard:
+                noteViewModel = new ViewModelProvider(getActivity())
+                        .get(NewNoteDialogViewModel.class);
+                noteViewModel.getAllNotesFavorites();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -130,5 +138,10 @@ public class NoteFragment extends Fragment {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         NewNoteDialogFragment dialogNewNote = new NewNoteDialogFragment();
         dialogNewNote.show(fm, "NewNoteDialogFragment");
+    }
+    private void showDialogDeleteAllNotes() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        DeleteAllNotesDialogFragment dialogDeleteAllNotes = new DeleteAllNotesDialogFragment();
+        dialogDeleteAllNotes.show(fm, "DeleteAllNotesDialogFragment");
     }
 }

@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_baseline_note_add_24"
         android:title="@string/action_add_note"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_delete_notes"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:title="@string/action_add_note"
+        app:showAsAction="ifRoom" />
 </menu>

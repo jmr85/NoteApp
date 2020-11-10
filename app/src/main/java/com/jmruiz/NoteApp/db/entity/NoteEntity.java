@@ -14,15 +14,13 @@ public class NoteEntity {
     private String title;
     private String content;
     private boolean favorite;
-    private String color;
     @ColumnInfo(name = "created_at")
     private Date createdAt;
 
-    public NoteEntity(String title, String content, boolean favorite, String color) {
+    public NoteEntity(String title, String content, boolean favorite) {
         this.title = title;
         this.content = content;
         this.favorite = favorite;
-        this.color = color;
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
@@ -56,14 +54,6 @@ public class NoteEntity {
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public Date getCreatedAt() {

@@ -1,4 +1,4 @@
-package com.jmruiz.NoteApp.db;
+package com.jmruiz.NoteApp.db.converter;
 
 import androidx.room.TypeConverter;
 
