@@ -2,6 +2,7 @@ package com.jmruiz.NoteApp.db;
 
 import android.content.Context;
 
+import androidx.room.Dao;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -11,16 +12,19 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.jmruiz.NoteApp.db.converter.DateTypeConverter;
 import com.jmruiz.NoteApp.db.dao.NoteDao;
+import com.jmruiz.NoteApp.db.dao.UserDao;
 import com.jmruiz.NoteApp.db.entity.NoteEntity;
+import com.jmruiz.NoteApp.db.entity.UserEntity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {NoteEntity.class}, version = 2, exportSchema = false)
+@Database(entities = {NoteEntity.class, UserEntity.class}, version = 2, exportSchema = false)
 @TypeConverters({DateTypeConverter.class})
 public abstract class NoteDatabase  extends RoomDatabase {
 
     public abstract NoteDao noteDao();
+    public abstract UserDao userDao();
 
     private static volatile NoteDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;

@@ -6,19 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="24dp"
-    tools:context=".ui.MainActivity">
-
-    <Button
-        android:id="@+id/btnCreateAccount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="Create Account"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+    tools:context=".ui.CreateAccountActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -31,11 +19,11 @@
         app:srcCompat="@drawable/ic_checklist" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtCreateAccounteView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="NoteApp"
+        android:text="Create Account"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/edTextEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -55,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/edTextPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -67,12 +55,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmail" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/btnRecord"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimaryDark"
-        android:text="Sign in"
+        android:text="Record"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
