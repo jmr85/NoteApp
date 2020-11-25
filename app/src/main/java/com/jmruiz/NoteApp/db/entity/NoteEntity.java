@@ -16,11 +16,16 @@ public class NoteEntity {
     private boolean favorite;
     @ColumnInfo(name = "created_at")
     private Date createdAt;
+    @ColumnInfo(name = "image_path")
+    private String imagePath;
 
-    public NoteEntity(String title, String content, boolean favorite) {
+    public NoteEntity(){}
+
+    public NoteEntity(String title, String content, boolean favorite, String imagePath) {
         this.title = title;
         this.content = content;
         this.favorite = favorite;
+        this.imagePath = imagePath;
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
@@ -62,5 +67,13 @@ public class NoteEntity {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

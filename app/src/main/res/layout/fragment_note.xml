@@ -11,13 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageNotes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/editTextTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_gradient_24" />
 
         <EditText
             android:id="@+id/editTextTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
@@ -25,6 +37,7 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/imageViewFavorite"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,6 +62,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/editTextTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.712"
             app:srcCompat="@drawable/ic_baseline_star_border_24"
             tools:ignore="ContentDescription" />
 
@@ -56,10 +70,12 @@
             android:id="@+id/imageViewSaveNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/editTextContent"
             app:layout_constraintTop_toBottomOf="@+id/editTextContent"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/ic_baseline_save_24" />
 
         <ImageView
@@ -67,6 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
             app:layout_constraintStart_toEndOf="@+id/imageViewSaveNote"
             app:layout_constraintTop_toBottomOf="@+id/editTextContent"
             app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
