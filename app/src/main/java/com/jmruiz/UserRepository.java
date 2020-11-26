@@ -7,6 +7,7 @@ import androidx.room.Dao;
 
 import com.jmruiz.NoteApp.db.NoteDatabase;
 import com.jmruiz.NoteApp.db.dao.UserDao;
+import com.jmruiz.NoteApp.db.entity.NoteEntity;
 import com.jmruiz.NoteApp.db.entity.UserEntity;
 
 import java.util.List;
@@ -20,10 +21,9 @@ public class UserRepository {
     public UserRepository(Application application) {
         NoteDatabase db = NoteDatabase.getDatabase(application);
         userDao = db.userDao();
-        user = userDao.getById(id);
+        //user = userDao.getUserMailAndPass(mail, password);
     }
 
-    public LiveData<UserEntity> getUser(int id) { return user; }
 
     public void insert(UserEntity user) {
         NoteDatabase.databaseWriteExecutor.execute(() -> {
@@ -41,5 +41,9 @@ public class UserRepository {
         NoteDatabase.databaseWriteExecutor.execute(() -> {
             userDao.deleteById(user);
         });
+    }
+
+    public LiveData<UserEntity> getUserMailAndPass(String mail, String password) {
+        return userDao.getUserMailAndPass(mail, password);
     }
 }

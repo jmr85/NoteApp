@@ -14,6 +14,9 @@
         <activity
             android:name="com.jmruiz.NoteApp.ui.DashboardActivity"
             android:label="@string/title_activity_notes"></activity>
+        <activity
+            android:name="com.jmruiz.NoteApp.ui.CreateAccountActivity"
+            android:label="Create Account"></activity>
         <activity android:name="com.jmruiz.NoteApp.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

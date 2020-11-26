@@ -10,17 +10,16 @@ import com.jmruiz.UserRepository;
 
 public class UserViewModel extends AndroidViewModel {
 
-    private LiveData<UserEntity> user;
-    protected  int id;
     private UserRepository UserRepository;
 
     public UserViewModel(Application application) {
         super(application);
         UserRepository = new UserRepository(application);
-        user = UserRepository.getUser(id);
     }
 
-    public LiveData<UserEntity> getUser(int id) { return user; }
+    public LiveData<UserEntity> getUserMailAndPass(String mail, String password) {
+        return UserRepository.getUserMailAndPass(mail, password);
+    }
 
     // El fragment que inserte una nueva nota, deberá comunicarlo a este ViewModel
     public void insertUser(UserEntity newUserEntity) { UserRepository.insert(newUserEntity); }

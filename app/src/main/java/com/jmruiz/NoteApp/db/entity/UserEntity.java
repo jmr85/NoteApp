@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "notes")
+@Entity(tableName = "user")
 public class UserEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -16,6 +16,11 @@ public class UserEntity {
     private String password;
 
     public UserEntity(){}
+
+    public UserEntity(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public UserEntity(String email, String name, String password) {
         this.email = email;

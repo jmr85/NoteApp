@@ -32,7 +32,6 @@ public class DataRepository {
 
     public LiveData<NoteEntity> getNote(int id) { return note; }
 
-
     public void insert(NoteEntity note) {
         NoteDatabase.databaseWriteExecutor.execute(() -> {
             noteDao.insert(note);

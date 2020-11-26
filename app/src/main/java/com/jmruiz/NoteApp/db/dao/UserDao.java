@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.jmruiz.NoteApp.db.entity.NoteEntity;
 import com.jmruiz.NoteApp.db.entity.UserEntity;
 
 import java.util.List;
@@ -20,9 +19,9 @@ public interface UserDao {
     @Update
     void update(UserEntity user);
 
+    @Query("SELECT * FROM user where email= :mail and password= :password")
+    LiveData<UserEntity> getUserMailAndPass(String mail, String password);
+
     @Delete
     void deleteById(UserEntity user);
-
-    @Query("SELECT * FROM notes WHERE id = :idUser")
-    LiveData<UserEntity> getById(int idUser);
 }
