@@ -3,6 +3,7 @@ package com.jmruiz.NoteApp.ui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.buttonLogin);
 
         email = editTextEmail.getText().toString();
-        password = editTextEmail.getText().toString();
+        password = editTextPassword.getText().toString();
 
         // definir el evento click sobre el boton de Login
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +65,43 @@ public class MainActivity extends AppCompatActivity {
                                         "try again", Toast.LENGTH_SHORT).show();
 
                     }*/
-                    if(userEntity == null){
+
+                if(validate()){
+                    Toast.makeText(getApplicationContext(),
+                            "Redirecting...",Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(MainActivity.this, DashboardActivity.class);
+                    startActivity(i);
+                }
+
+             /*   if(TextUtils.isEmpty(editTextEmail.getText().toString())){
+                    editTextEmail.setError("Email cannot be blank");
+
+                }else if(TextUtils.isEmpty(password)) {
+                    editTextPassword.setError("Password cannot be blank");
+                }else{
+                    Toast.makeText(getApplicationContext(),
+                            "Redirecting...",Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(MainActivity.this, DashboardActivity.class);
+                    startActivity(i);
+                }*/
+
+
+             /*   if(editTextEmail.getText().length() == 0 || editTextPassword.getText().length() == 0){//como o tamanho é zero é nulla aresposta
+
+                    editTextEmail.setError("Empty field");
+                    editTextPassword.setError("Empty field");
+
+
+                }*/
+             /*   else if (meuEditText.getText().length() < 5){
+
+                    meuEditText.setError("Minimo 5 letras");
+
+                }*/
+
+             /*       if(userEntity == null){
                         Toast.makeText(getApplicationContext(), "Wrong " +
                                 "Credentials",Toast.LENGTH_SHORT).show();
                     }else{
@@ -73,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent i = new Intent(MainActivity.this, DashboardActivity.class);
                         startActivity(i);
-                    }
+                    }*/
 
                 // end logica login
             }
@@ -86,5 +123,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+    public boolean validate(){
+        boolean valid = true;
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editTextEmail.setError("enter a valid email address");
+            valid = false;
+        } else {
+            editTextEmail.setError(null);
+            valid = true;
+        }
+
+        if (password.isEmpty() || password.length() < 4 || password.length() > 8) {
+            editTextPassword.setError("between 4 and 8 alphanumeric characters");
+            valid = false;
+        } else {
+            editTextPassword.setError(null);
+            valid = true;
+        }
+
+        return valid;
     }
 }
