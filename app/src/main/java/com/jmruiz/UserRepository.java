@@ -43,7 +43,7 @@ public class UserRepository {
         });
     }
 
-    public LiveData<UserEntity> getUserMailAndPass(String mail, String password) {
+    public UserEntity getUserMailAndPass(String mail, String password) {
         return userDao.getUserMailAndPass(mail, password);
     }
 }

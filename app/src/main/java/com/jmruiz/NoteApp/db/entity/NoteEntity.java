@@ -2,6 +2,7 @@ package com.jmruiz.NoteApp.db.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -19,6 +20,7 @@ public class NoteEntity {
     @ColumnInfo(name = "image_path")
     private String imagePath;
 
+    @Ignore
     public NoteEntity(){}
 
     public NoteEntity(String title, String content, boolean favorite, String imagePath) {

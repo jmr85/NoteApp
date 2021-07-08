@@ -17,7 +17,7 @@ public class UserViewModel extends AndroidViewModel {
         UserRepository = new UserRepository(application);
     }
 
-    public LiveData<UserEntity> getUserMailAndPass(String mail, String password) {
+    public UserEntity getUserMailAndPass(String mail, String password) {
         return UserRepository.getUserMailAndPass(mail, password);
     }
 

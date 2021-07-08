@@ -47,6 +47,7 @@ public abstract class NoteDatabase  extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             NoteDatabase.class, "notes_database")
                             .addMigrations(MIGRATION_1_2)
+                            .allowMainThreadQueries()
                             .build();
                 }
             }

@@ -20,7 +20,7 @@ public interface UserDao {
     void update(UserEntity user);
 
     @Query("SELECT * FROM user where email= :mail and password= :password")
-    LiveData<UserEntity> getUserMailAndPass(String mail, String password);
+    UserEntity getUserMailAndPass(String mail, String password);
 
     @Delete
     void deleteById(UserEntity user);

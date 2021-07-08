@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     UserViewModel userViewModel;
     String email, password;
 
-    LiveData<UserEntity> userEntity;
+    UserEntity userEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.buttonLogin);
 
-        email = editTextEmail.getText().toString();
-        password = editTextPassword.getText().toString();
+        //email = editTextEmail.getText().toString();
+        //password = editTextPassword.getText().toString();
 
         // definir el evento click sobre el boton de Login
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                userViewModel = new ViewModelProvider(MainActivity.this)
-                        .get(UserViewModel.class);
+                //1 userViewModel = new ViewModelProvider(MainActivity.this)
+                        //2 .get(UserViewModel.class);
                 //final UserEntity userEntity = new UserEntity(email,password);
 
                 //userEntity = new LiveData<UserEntity>;
 
-                userEntity = userViewModel.getUserMailAndPass(email, password);
+                //3userEntity = userViewModel.getUserMailAndPass(email, password);
 
                 // logica login
                  /*   if(editTextEmail.getText().toString().matches("") ||
@@ -73,46 +73,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(MainActivity.this, DashboardActivity.class);
                     startActivity(i);
                 }
-
-             /*   if(TextUtils.isEmpty(editTextEmail.getText().toString())){
-                    editTextEmail.setError("Email cannot be blank");
-
-                }else if(TextUtils.isEmpty(password)) {
-                    editTextPassword.setError("Password cannot be blank");
-                }else{
-                    Toast.makeText(getApplicationContext(),
-                            "Redirecting...",Toast.LENGTH_SHORT).show();
-
-                    Intent i = new Intent(MainActivity.this, DashboardActivity.class);
-                    startActivity(i);
-                }*/
-
-
-             /*   if(editTextEmail.getText().length() == 0 || editTextPassword.getText().length() == 0){//como o tamanho é zero é nulla aresposta
-
-                    editTextEmail.setError("Empty field");
-                    editTextPassword.setError("Empty field");
-
-
-                }*/
-             /*   else if (meuEditText.getText().length() < 5){
-
-                    meuEditText.setError("Minimo 5 letras");
-
-                }*/
-
-             /*       if(userEntity == null){
-                        Toast.makeText(getApplicationContext(), "Wrong " +
-                                "Credentials",Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(getApplicationContext(),
-                                "Redirecting...",Toast.LENGTH_SHORT).show();
-
-                        Intent i = new Intent(MainActivity.this, DashboardActivity.class);
-                        startActivity(i);
-                    }*/
-
-                // end logica login
             }
         });
 
@@ -127,21 +87,41 @@ public class MainActivity extends AppCompatActivity {
     public boolean validate(){
         boolean valid = true;
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        email = editTextEmail.getText().toString();
+        password = editTextPassword.getText().toString();
+
+        userViewModel = new ViewModelProvider(MainActivity.this)
+                .get(UserViewModel.class);
+
+        //userEntity = userViewModel.getUserMailAndPass(email, password);
+
+        // Check for a valid email address.
+        if (email.toString().isEmpty()) {
+            editTextEmail.setError("email is empty");
+            valid = false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.toString()).matches()) {
             editTextEmail.setError("enter a valid email address");
             valid = false;
-        } else {
-            editTextEmail.setError(null);
+
+        }  else {
             valid = true;
+            editTextEmail.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 8) {
-            editTextPassword.setError("between 4 and 8 alphanumeric characters");
+        // Check for a valid password.
+        if (password.toString().isEmpty()) {
+            editTextPassword.setError("password is empty");
             valid = false;
-        } else {
-            editTextPassword.setError(null);
+        }else{
             valid = true;
+            editTextPassword.setError(null);
         }
+
+      /*  if(userViewModel.getUserMailAndPass(email, password).getEmail().equals(email) && userViewModel.getUserMailAndPass(email, password).getPassword().equals(password)){
+            valid = false;
+        }else{
+            valid = true;
+        }*/
 
         return valid;
     }

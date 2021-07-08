@@ -2,6 +2,7 @@ package com.jmruiz.NoteApp.db.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ public class UserEntity {
     private String name;
     private String password;
 
+    @Ignore
     public UserEntity(){}
 
     public UserEntity(String email, String password) {
@@ -22,6 +24,7 @@ public class UserEntity {
         this.password = password;
     }
 
+    @Ignore
     public UserEntity(String email, String name, String password) {
         this.email = email;
         this.name = name;
